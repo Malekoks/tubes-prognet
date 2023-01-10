@@ -57,7 +57,7 @@
                             <select name="nama_keaktifan" id="nama_keaktifan" class="form-control">
                                 <option value="">== Select Status Keaktifan ==</option>
                                 @foreach ($statuskeaktifan as $item)
-                                <option value="{{ $item->id }}" {{ ($riwayatkeaktifan->status_keaktipan_id == $item->id) ? 'selected' : ''}}>{{ $item->nama}}</option>
+                                <option value="{{ $item->id }}" {{ ($riwayatkeaktifan->status_keaktifan_id == $item->id) ? 'selected' : ''}}>{{ $item->nama_keaktifan}}</option>
                                 @endforeach
                             </select>
                                 @error('nama_keaktifan')
