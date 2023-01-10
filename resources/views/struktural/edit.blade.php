@@ -1,4 +1,5 @@
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
+
 @extends('layouts.app')
 @section('action')
 

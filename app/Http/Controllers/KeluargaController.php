@@ -116,7 +116,7 @@ class KeluargaController extends Controller
     {
         $keluarga = Keluarga::find($id);
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Keluarga';
+        $subtitle = 'Edit Data Keluarga';
         $agama = Agama::get();
         $pekerjaan = Pekerjaan::get();
         $golongandarah = GolonganDarah::get();

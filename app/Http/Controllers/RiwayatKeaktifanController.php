@@ -7,6 +7,7 @@ use App\Models\StatusKeaktifan;
 use App\Models\RiwayatKeaktifan;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class RiwayatKeaktifanController extends Controller
 {
@@ -45,7 +46,8 @@ class RiwayatKeaktifanController extends Controller
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Data Riwayat Struktural';
         $pegawai = Pegawai::find($id);
-        return view('keaktifan.create',compact('subtitle','icon'))->with(compact('pegawai'));
+        $statuskeaktifan = StatusKeaktifan::get();
+        return view('keaktifan.create',compact('subtitle','icon'))->with(compact('pegawai','statuskeaktifan'));
     }
 
     public function edit(Request $request){
@@ -66,12 +68,59 @@ class RiwayatKeaktifanController extends Controller
     {
          $riwayatkeaktifan = new RiwayatKeaktifan();
          $riwayatkeaktifan->pegawai_id = $request->pegawai_id;
-         $riwayatkeaktifan->jabatan_struktural_id = $request->nama_jabatan_singkat;
-         $riwayatkeaktifan->unit_id = $request->nama;
-         $riwayatkeaktifan->sub_unit_id = $request->subunit;
-         $riwayatkeaktifan->no_sk_diangkat = $request->pekerjaan;
+         $riwayatkeaktifan->status_keaktifan_id = $request->nama_keaktifan;
+         $riwayatkeaktifan->no_sk = $request->no_sk;
+         $riwayatkeaktifan->tmt_sk = $request->tmt_sk;
+         $riwayatkeaktifan->tgl_sk = $request->tgl_sk;
+         $riwayatkeaktifan->nama_penanda_tangan = $request->nama_penanda_tangan;
+         $riwayatkeaktifan->jabatan_penanda_tangan= $request->jabatan_penanda_tangan;
+         $riwayatkeaktifan->nip_penanda_tangan = $request->nip_penanda_tangan;
          $riwayatkeaktifan->save();
 
-         return redirect()->route('crud.struktur', $request->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
+         return redirect()->route('crud.keaktifan', $request->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
      }
+
+     public function destroy($id)
+    {
+        $status = false;
+        try{
+            DB::table('t_riwayat_keaktifan')
+                ->where('riwayat_keaktifan_id', $id)->delete();
+            $status = true;
+            $message = "Data Telah di Hapus !";
+            return response()->json([
+                'status' => $status,
+                'message' => $message
+            ]);
+        }catch(\Exception $e){
+
+        }
+    }
+
+    public function editkeaktifan($id)
+    {
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Edit Data Riwayat Struktural';
+        $riwayatkeaktifan = RiwayatKeaktifan::find($id);
+        $pegawai = Pegawai::find($id);
+        $statuskeaktifan = StatusKeaktifan::get();
+        return view('keaktifan.edit')->with(compact('icon','subtitle','riwayatstruktural', 'pegawai', 'statuskeaktifan'));
+    }
+
+    public function updatekeaktifan(Request $request, $id)
+    {
+        $riwayatkeaktifan = RiwayatKeaktifan::find($id);
+        $riwayatkeaktifan->pegawai_id = $request->pegawai_id;
+        $riwayatkeaktifan->status_keaktifan_id = $request->nama_keaktifan;
+        $riwayatkeaktifan->no_sk = $request->no_sk;
+        $riwayatkeaktifan->tmt_sk = $request->tmt_sk;
+        $riwayatkeaktifan->tgl_sk = $request->tgl_sk;
+        $riwayatkeaktifan->nama_penanda_tangan = $request->nama_penanda_tangan;
+        $riwayatkeaktifan->jabatan_penanda_tangan= $request->jabatan_penanda_tangan;
+        $riwayatkeaktifan->nip_penanda_tangan = $request->nip_penanda_tangan;
+        $riwayatkeaktifan->update();
+
+        return redirect()->route('crud.keaktifan', $riwayatkeaktifan->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
+    }
+
 }

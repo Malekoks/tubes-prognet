@@ -48,3 +48,6 @@ Route::put('/struktural/{id}',[RiwayatStrukturalController::class,'updatestruktu
 Route::get('/crud/{id}/keaktifan',[RiwayatKeaktifanController::class,'riwayatKeaktifan'])->name('crud.keaktifan');
 Route::get('/keaktifan/create/{pegawai}',[RiwayatKeaktifanController::class,'create'])->name('keaktifan.create');
 Route::post('/keaktifan/store',[RiwayatKeaktifanController::class,'store'])->name('keaktifan.store');
+Route::delete('/keaktifan/{id}',[RiwayatKeaktifanController::class,'destroy'])->name('keaktifan.destroy');
+Route::get('/keaktifan/{id}',[RiwayatKeaktifanController::class,'editkeaktifan'])->name('keaktifan.edit');
+Route::put('/keaktifan/{id}',[RiwayatKeaktifanController::class,'updatekeaktifan'])->name('keaktifan.update');

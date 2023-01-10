@@ -55,18 +55,23 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-
             <form  method="POST" action="{{ route('keaktifan.store') }}" id='form1' enctype="multipart/form-data">
                     @csrf
                     @method('POST')
+                    <input type="hidden" value="{{ $pegawai->id }}" name="pegawai_id">
                     <div class="row mb-3">
                         <div class="col-md">
                             <div class="form-group">
-                            <label>Kode Pegawai</label>
-                                <input type="text" class="form-control @error('kode') is-invalid @enderror" name="kode" required autofocus value="{{ old('pegawai') }}">
-                            @error('kode')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                            <label>Status Keaktifan</label>
+                            <select name="nama_keaktifan" id="nama_keaktifan" class="form-control">
+                                <option value="">== Select Status Keaktifan ==</option>
+                                @foreach ($statuskeaktifan as $id => $name)
+                                    <option value="{{ $id }}">{{ $name->nama_keaktifan }}</option>
+                                @endforeach
+                            </select>
+                                @error('nama_keaktifan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                             </div>
                             </div>
                             @enderror
@@ -77,8 +82,8 @@
                         <div class="col-md">
                             <div class="form-group">
                             <label>No SK</label>
-                                <input type="text" class="form-control @error('noskdiangkat') is-invalid @enderror" name="noskdiangkat" required autofocus value="{{ old('pegawai') }}">
-                            @error('noskdiangkat')
+                                <input type="text" class="form-control @error('no_sk') is-invalid @enderror" name="no_sk" required autofocus value="{{ old('no_sk') }}">
+                            @error('no_sk')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -91,8 +96,8 @@
                         <div class="col-md">
                             <div class="form-group">
                             <label>Terhitung Mulai Tanggal</label>
-                                <input type="date" class="form-control @error('tmt_sk_diangkat') is-invalid @enderror" name="tmt_sk_diangkat" required autofocus value="{{ old('tmt_sk_diangkat') }}">
-                                @error('tmt_sk_diangkat')
+                                <input type="date" class="form-control @error('tmt_sk') is-invalid @enderror" name="tmt_sk" required autofocus value="{{ old('tmt_sk') }}">
+                                @error('tmt_sk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                             </div>
@@ -105,10 +110,52 @@
                         <div class="col-md">
                             <div class="form-group">
                             <label>Tanggal SK</label>
-                                <input type="date" class="form-control @error('tgl_sk_diangkat') is-invalid @enderror" name="tgl_sk_diangkat" required autofocus value="{{ old('tgl_sk_diangkat') }}">
-                                @error('tgl_sk_diangkat')
+                                <input type="date" class="form-control @error('tgl_sk') is-invalid @enderror" name="tgl_sk" required autofocus value="{{ old('tgl_sk') }}">
+                                @error('tgl_sk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
+                            </div>
+                            </div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <div class="form-group">
+                            <label>Nama Penanda Tangan</label>
+                                <input type="text" class="form-control @error('nama_penanda_tangan') is-invalid @enderror" name="nama_penanda_tangan" required autofocus value="{{ old('nama_penanda_tangan') }}">
+                            @error('nama_penanda_tangan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            </div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <div class="form-group">
+                            <label>Jabatan Penanda Tangan</label>
+                                <input type="text" class="form-control @error('jabatan_penanda_tangan') is-invalid @enderror" name="jabatan_penanda_tangan" required autofocus value="{{ old('jabatan_penanda_tangan') }}">
+                            @error('jabatan_penanda_tangan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            </div>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <div class="form-group">
+                            <label>NIP Penanda Tangan</label>
+                                <input type="text" class="form-control @error('nip_penanda_tangan') is-invalid @enderror" name="nip_penanda_tangan" required autofocus value="{{ old('nip_penanda_tangan') }}">
+                            @error('nip_penanda_tangan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                             </div>
                             @enderror

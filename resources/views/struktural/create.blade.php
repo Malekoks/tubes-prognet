@@ -55,7 +55,6 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-
             <form  method="POST" action="{{ route('struktural.store') }}" id='form1' enctype="multipart/form-data">
                     @csrf
                     @method('POST')

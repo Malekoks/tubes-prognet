@@ -114,7 +114,7 @@ class RiwayatStrukturalController extends Controller
     public function editstruktural($id)
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Riwayat Struktural';
+        $subtitle = 'Edit Data Riwayat Struktural';
         $riwayatstruktural = RiwayatStruktural::find($id);
         $pegawai = Pegawai::find($id);
         $unitmedik = UnitMedik::get();
