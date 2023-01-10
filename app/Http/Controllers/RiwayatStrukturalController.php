@@ -9,6 +9,7 @@ use App\Models\JabatanStruktural;
 use App\Models\RiwayatStruktural;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class RiwayatStrukturalController extends Controller
 {
@@ -73,10 +74,79 @@ class RiwayatStrukturalController extends Controller
         $riwayatstruktural->pegawai_id = $request->pegawai_id;
         $riwayatstruktural->jabatan_struktural_id = $request->nama_jabatan_singkat;
         $riwayatstruktural->unit_id = $request->nama;
-        $riwayatstruktural->sub_unit_id = $request->subunit;
-        $riwayatstruktural->no_sk_diangkat = $request->pekerjaan;
+        $riwayatstruktural->sub_unit_id = $request->nama_subunit;
+        $riwayatstruktural->no_sk_diangkat = $request->no_sk_diangkat;
+        $riwayatstruktural->tmt_sk_diangkat = $request->tmt_sk_diangkat;
+        $riwayatstruktural->tgl_sk_diangkat = $request->tgl_sk_diangkat;
+        $riwayatstruktural->no_sk_berhenti = $request->no_sk_berhenti;
+        $riwayatstruktural->tmt_sk_berhenti = $request->tmt_sk_berhenti;
+        $riwayatstruktural->tgl_sk_berhenti = $request->tgl_sk_berhenti;
+        $riwayatstruktural->tgl_sk_berakhir = $request->tgl_sk_berakhir;
+        $riwayatstruktural->nama_penanda_tangan_pengangkat = $request->nama_penanda_tangan_pengangkat;
+        $riwayatstruktural->jabatan_penanda_tangan_pengangkat = $request->jabatan_penanda_tangan_pengangkat;
+        $riwayatstruktural->nip_penanda_tangan_pengangkat = $request->nip_penanda_tangan_pengangkat;
+        $riwayatstruktural->nama_penanda_tangan_berhenti = $request->nama_penanda_tangan_berhenti;
+        $riwayatstruktural->jabatan_penanda_tangan_berhenti = $request->jabatan_penanda_tangan_berhenti;
+        $riwayatstruktural->nip_penanda_tangan_berhenti = $request->nip_penanda_tangan_berhenti;
+        $riwayatstruktural->keterangan = $request->keterangan;
         $riwayatstruktural->save();
 
         return redirect()->route('crud.struktural', $request->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
     }
+
+    public function destroy($id)
+    {
+        $status = false;
+        try{
+            DB::table('t_riwayat_struktural')
+                ->where('riwayat_struktural_id', $id)->delete();
+            $status = true;
+            $message = "Data Telah di Hapus !";
+            return response()->json([
+                'status' => $status,
+                'message' => $message
+            ]);
+        }catch(\Exception $e){
+
+        }
+    }
+
+    public function editstruktural($id)
+    {
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Tambah Data Riwayat Struktural';
+        $riwayatstruktural = RiwayatStruktural::find($id);
+        $pegawai = Pegawai::find($id);
+        $unitmedik = UnitMedik::get();
+        $subunitmedik = SubUnitMedik::get();
+        $jabatanstruktural = JabatanStruktural::get();
+        return view('struktural.edit')->with(compact('icon','subtitle','riwayatstruktural', 'pegawai', 'unitmedik', 'subunitmedik', 'jabatanstruktural'));
+    }
+
+    public function updatestruktural(Request $request, $id)
+    {
+        $riwayatstruktural = RiwayatStruktural::find($id);
+        $riwayatstruktural->pegawai_id = $request->pegawai_id;
+        $riwayatstruktural->jabatan_struktural_id = $request->nama_jabatan_singkat;
+        $riwayatstruktural->unit_id = $request->nama;
+        $riwayatstruktural->sub_unit_id = $request->nama_subunit;
+        $riwayatstruktural->no_sk_diangkat = $request->no_sk_diangkat;
+        $riwayatstruktural->tmt_sk_diangkat = $request->tmt_sk_diangkat;
+        $riwayatstruktural->tgl_sk_diangkat = $request->tgl_sk_diangkat;
+        $riwayatstruktural->no_sk_berhenti = $request->no_sk_berhenti;
+        $riwayatstruktural->tmt_sk_berhenti = $request->tmt_sk_berhenti;
+        $riwayatstruktural->tgl_sk_berhenti = $request->tgl_sk_berhenti;
+        $riwayatstruktural->tgl_sk_berakhir = $request->tgl_sk_berakhir;
+        $riwayatstruktural->nama_penanda_tangan_pengangkat = $request->nama_penanda_tangan_pengangkat;
+        $riwayatstruktural->jabatan_penanda_tangan_pengangkat = $request->jabatan_penanda_tangan_pengangkat;
+        $riwayatstruktural->nip_penanda_tangan_pengangkat = $request->nip_penanda_tangan_pengangkat;
+        $riwayatstruktural->nama_penanda_tangan_berhenti = $request->nama_penanda_tangan_berhenti;
+        $riwayatstruktural->jabatan_penanda_tangan_berhenti = $request->jabatan_penanda_tangan_berhenti;
+        $riwayatstruktural->nip_penanda_tangan_berhenti = $request->nip_penanda_tangan_berhenti;
+        $riwayatstruktural->keterangan = $request->keterangan;
+        $riwayatstruktural->update();
+
+        return redirect()->route('crud.struktural', $riwayatstruktural->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
+    }
+
 }
