@@ -68,7 +68,7 @@ class RiwayatKeaktifanController extends Controller
     {
          $riwayatkeaktifan = new RiwayatKeaktifan();
          $riwayatkeaktifan->pegawai_id = $request->pegawai_id;
-         $riwayatkeaktifan->status_keaktifan_id = $request->nama_keaktifan;
+         $riwayatkeaktifan->status_keaktipan_id = $request->nama_keaktifan;
          $riwayatkeaktifan->no_sk = $request->no_sk;
          $riwayatkeaktifan->tmt_sk = $request->tmt_sk;
          $riwayatkeaktifan->tgl_sk = $request->tgl_sk;
@@ -100,11 +100,11 @@ class RiwayatKeaktifanController extends Controller
     public function editkeaktifan($id)
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Edit Data Riwayat Struktural';
+        $subtitle = 'Edit Data Riwayat Keaktifan';
         $riwayatkeaktifan = RiwayatKeaktifan::find($id);
         $pegawai = Pegawai::find($id);
         $statuskeaktifan = StatusKeaktifan::get();
-        return view('keaktifan.edit')->with(compact('icon','subtitle','riwayatstruktural', 'pegawai', 'statuskeaktifan'));
+        return view('keaktifan.edit')->with(compact('icon','subtitle','riwayatkeaktifan', 'pegawai', 'statuskeaktifan'));
     }
 
     public function updatekeaktifan(Request $request, $id)
