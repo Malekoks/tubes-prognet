@@ -20,6 +20,31 @@
                         <td>:</td>
                         <td>{{ $pegawai->nama }}</td>
                     </tr>
+                    <tr>
+                        <td>NIK Karyawan</td>
+                        <td>:</td>
+                        <td>{{ $pegawai->nik }}</td>
+                    </tr>
+                    <tr>
+                        <td>Agama Karyawan</td>
+                        <td>:</td>
+                        <td>{{ $pegawai->nama_agama }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jenjang Pendidikan Karyawan</td>
+                        <td>:</td>
+                        <td>{{ $pegawai->nama_pendidikan }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tempat Lahir Karyawan</td>
+                        <td>:</td>
+                        <td>{{ $pegawai->tempat_lahir }}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat Karyawan</td>
+                        <td>:</td>
+                        <td>{{ $pegawai->alamat }}</td>
+                    </tr>
                 </table>
             </div>
         </div>

@@ -68,7 +68,7 @@ class RiwayatKeaktifanController extends Controller
     {
          $riwayatkeaktifan = new RiwayatKeaktifan();
          $riwayatkeaktifan->pegawai_id = $request->pegawai_id;
-         $riwayatkeaktifan->status_keaktipan_id = $request->nama_keaktifan;
+         $riwayatkeaktifan->status_keaktifan_id = $request->nama_keaktifan;
          $riwayatkeaktifan->no_sk = $request->no_sk;
          $riwayatkeaktifan->tmt_sk = $request->tmt_sk;
          $riwayatkeaktifan->tgl_sk = $request->tgl_sk;

@@ -57,7 +57,7 @@
                             <select name="nama_jabatan_singkat" id="nama_jabatan_singkat" class="form-control">
                                 <option value="">== Select Jabatan Struktural ==</option>
                                 @foreach ($jabatanstruktural as $item)
-                                <option value="{{ $item->id }}" {{ ($riwayatstruktural->jabatan_struktural_id == $item->id) ? 'selected' : ''}}>{{ $item->nama_jabatan_singkat }}</option>
+                                <option value="{{ $item->id }}" {{ ($riwayatstruktural->jabatan_id == $item->id) ? 'selected' : ''}}>{{ $item->nama_jabatan_singkat }}</option>
                                 @endforeach
                             </select>
                                 @error('nama_jabatan_singkat')

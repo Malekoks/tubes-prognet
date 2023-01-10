@@ -28,7 +28,7 @@
 <div class="nk-fmg-quick-list nk-block">
     <div class="nk-fmg-body-head d-none d-lg-flex">
         <div class="nk-fmg-search">
-            <h4 class="card-title text-primary"><i class="ni ni-dashlite" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Anggota Keluarga"></i>  RIWAYAT STRUKTURAL</h4>
+            <h4 class="card-title text-primary"><i class="ni ni-dashlite" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Anggota Keluarga"></i>  RIWAYAT KEAKTIFAN</h4>
         </div>
         <div class="nk-fmg-actions">
             <div class="btn-group">

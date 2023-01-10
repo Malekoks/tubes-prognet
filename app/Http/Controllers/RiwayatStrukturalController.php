@@ -63,8 +63,12 @@ class RiwayatStrukturalController extends Controller
 
     public function riwayatStruktural(Request $request, $id)
     {
-        $pegawai = Pegawai::find($id);
-        $riwayatstruktural = RiwayatStruktural::where('pegawai_id', $id)->get();
+        $pegawai = DB::table('m_pegawai')
+                    ->select('m_pegawai.id','m_pegawai.kode', 'm_pegawai.nama','m_agama.nama as nama_agama', 'm_pendidikan.nama as nama_pendidikan', 'm_pegawai.nik', 'm_pegawai.tempat_lahir','m_pegawai.alamat')
+                    ->leftJoin('m_agama', 'm_pegawai.agama_id', '=', 'm_agama.id')
+                    ->leftJoin('m_pendidikan', 'm_pegawai.pendidikan_terakhir_id', '=', 'm_pendidikan.id')
+                    ->where('m_pegawai.id', $id)->first();
+        $riwayatstruktural = RiwayatStruktural::where('pegawai_id', $id)->orderBy('riwayat_struktural_id', 'DESC')->get();
         return view('struktural.index')->with(compact('pegawai', 'riwayatstruktural'));
     }
 
@@ -113,14 +117,14 @@ class RiwayatStrukturalController extends Controller
 
     public function editstruktural($id)
     {
+        $riwayatstruktural = RiwayatStruktural::find($id);
         $icon = 'ni ni-dashlite';
         $subtitle = 'Edit Data Riwayat Struktural';
-        $riwayatstruktural = RiwayatStruktural::find($id);
         $pegawai = Pegawai::find($id);
         $unitmedik = UnitMedik::get();
         $subunitmedik = SubUnitMedik::get();
         $jabatanstruktural = JabatanStruktural::get();
-        return view('struktural.edit')->with(compact('icon','subtitle','riwayatstruktural', 'pegawai', 'unitmedik', 'subunitmedik', 'jabatanstruktural'));
+        return view('struktural.edit', compact('riwayatstruktural', 'icon','subtitle', 'pegawai', 'unitmedik', 'subunitmedik', 'jabatanstruktural'));
     }
 
     public function updatestruktural(Request $request, $id)
