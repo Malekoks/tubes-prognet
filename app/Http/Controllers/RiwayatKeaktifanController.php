@@ -110,7 +110,6 @@ class RiwayatKeaktifanController extends Controller
     public function updatekeaktifan(Request $request, $id)
     {
         $riwayatkeaktifan = RiwayatKeaktifan::find($id);
-        $riwayatkeaktifan->pegawai_id = $request->pegawai_id;
         $riwayatkeaktifan->status_keaktifan_id = $request->nama_keaktifan;
         $riwayatkeaktifan->no_sk = $request->no_sk;
         $riwayatkeaktifan->tmt_sk = $request->tmt_sk;

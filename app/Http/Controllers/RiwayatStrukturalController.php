@@ -130,7 +130,6 @@ class RiwayatStrukturalController extends Controller
     public function updatestruktural(Request $request, $id)
     {
         $riwayatstruktural = RiwayatStruktural::find($id);
-        $riwayatstruktural->pegawai_id = $request->pegawai_id;
         $riwayatstruktural->jabatan_struktural_id = $request->nama_jabatan_singkat;
         $riwayatstruktural->unit_id = $request->nama;
         $riwayatstruktural->sub_unit_id = $request->nama_subunit;
