@@ -93,6 +93,7 @@ class RiwayatStrukturalController extends Controller
         $riwayatstruktural->jabatan_penanda_tangan_berhenti = $request->jabatan_penanda_tangan_berhenti;
         $riwayatstruktural->nip_penanda_tangan_berhenti = $request->nip_penanda_tangan_berhenti;
         $riwayatstruktural->keterangan = $request->keterangan;
+        $riwayatstruktural->satus_data_valid = (empty($request->status_data_valid)) ? 0 : 1;
         $riwayatstruktural->save();
 
         return redirect()->route('crud.struktural', $request->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
@@ -147,6 +148,7 @@ class RiwayatStrukturalController extends Controller
         $riwayatstruktural->jabatan_penanda_tangan_berhenti = $request->jabatan_penanda_tangan_berhenti;
         $riwayatstruktural->nip_penanda_tangan_berhenti = $request->nip_penanda_tangan_berhenti;
         $riwayatstruktural->keterangan = $request->keterangan;
+        $riwayatstruktural->satus_data_valid = (empty($request->status_data_valid)) ? 0 : 1;
         $riwayatstruktural->update();
 
         return redirect()->route('crud.struktural', $riwayatstruktural->pegawai_id)->with(['success' => 'Data Berhasil Di Simpan !']);
